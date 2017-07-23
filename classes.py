@@ -60,10 +60,10 @@ class BikeShop:
         """Updates the shop's inventory after selling a bike."""
         if bike.dict_() in self.inventory:
             bike_index = self.inventory.index(bicycle)
-            del self.inventory[bike_index]
-            bike.price = bike.cost + bike.cost * 0.20
-            self.profit += (bicycle.price - bicycle.cost)
-            return "{} sold.\nProfit: ${:.2f}".format(bicycle, self.profit)
+            del self.inventory[bike_index]   # delete the sold bike from inventory
+            print("Bike sold removed from inventory. Profit added to total.")
+            self.profit += (bike.price - bike.cost)
+            return self.inventory, self.profit
         else:
             return "Bicycle not in stock."
             
