@@ -16,6 +16,7 @@ class Bicycle():
         return "Bicycle: {}, {}".format(self.model, self.weight)
         
     def dict_(self):
+        """Returns the bicycle in a dictionary form"""
         bike_info = {}
         bike_info["model"] = self.model
         bike_info["weight"] = self.weight
@@ -30,19 +31,20 @@ class BikeShop:
     they have made from selling bikes
     '''
     def __init__(self, name):
-        self.name = name
-        self.inventory = []
-        self.profit = 0
+        self.name = name # name of the bike shop
+        self.inventory = [] # a list of dictionaries containing bike info
+        self.profit = 0 # tracks the total profit of the bike shop
         print("Bicycle shop {} created!".format(self.name))
 
     def __repr__(self):
         if self.inventory:
             return "Shop name: {}".format(self.name)
         else:
-            return "Shop name: {}\nNo item in stock".format(self.name)
+            return "Shop name: {} NOTE: No item in stock".format(self.name)
 
     def stock(self, bike):
-        """Returns the inventory of the shop after acquiring bikes to sell."""
+        """Returns the inventory of the shop after adding a bicycle
+        to the inventory."""
         self.inventory.append(bike.dict_())
         return self.inventory
         
