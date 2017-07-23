@@ -1,5 +1,4 @@
 from bicycles import Bicycle, BikeShop, Customer
-import pprint
 import random
 
 def main():
