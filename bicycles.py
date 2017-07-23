@@ -71,7 +71,7 @@ class BikeShop:
                 self.profit = self.profit + (bike.price - bike.cost) 
                 #print(bike.price)
                 #print(bike.cost)
-                print("{} sold and removed from inventory. {} added to profit.".format(bike, (bike.price - bike.cost)))
+                print("{} sold and removed from inventory. ${:.2f} added to profit.".format(bike, (bike.price - bike.cost)))
                 for i, model in enumerate(inventory_models):
                     if model == bike.model:
                         del self.inventory[i]  # delete the sold bike from inventory
