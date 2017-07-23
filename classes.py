@@ -85,12 +85,15 @@ class Customer:
         self.name = name
         self.fund = fund
         
-    def buy(self, bike, bikeshop):
+    def __repr__(self):
+        return "{} with ${}".format(self.name, self.fund)
+        
+    def buy(self, n, bike, bikeshop):
         """Returns customer funds, bikeshop inventory after 
-        customer buys a bike."""
+        customer buys n number of bike from bikeshop."""
         if self.fund >= bike.price:
             self.fund -= bike.price
-            bikeshop.sell(bike)
+            bikeshop.sell(bike, n)
             print("{} bought a bike!".format(self.name))
             return self.fund, bikeshop
         else:
