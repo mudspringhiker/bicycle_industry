@@ -69,7 +69,7 @@ class BikeShop:
                 for i, model in enumerate(inventory_models):
                     if model == bike.model:
                         del self.inventory[i]  # delete the sold bike from inventory
-                        break
+                        break                  # delete only for first one found
                 self.profit += (bike.price - bike.cost)
                 print("{} sold and removed from inventory. Profit added to total.".format(bike))
                 return self.inventory, self.profit
