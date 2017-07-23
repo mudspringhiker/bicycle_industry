@@ -58,16 +58,23 @@ class BikeShop:
         record = [bike["model"] for bike in self.inventory]
         return Counter(record)
     
-    def sell(self, bike):
-        """Updates the shop's inventory after selling a bike."""
-        if bike.dict_() in self.inventory:
-            bike_index = self.inventory.index(bicycle)
-            del self.inventory[bike_index]   # delete the sold bike from inventory
-            print("Bike sold removed from inventory. Profit added to total.")
-            self.profit += (bike.price - bike.cost)
-            return self.inventory, self.profit
-        else:
-            return "Bicycle not in stock."
+    def sell(self, bike, n):
+        """Updates the shop's inventory after selling n number of bike."""
+        #print(bike.dict_()["model"])
+        #print(self.inventory)
+        inventory_models = [item["model"] for item in self.inventory]
+        for i in range(n):
+            if bike.model in inventory_models:
+                # print(True)
+                for i, model in enumerate(inventory_models):
+                    if model == bike.model:
+                        del self.inventory[i]  # delete the sold bike from inventory
+                        break
+                self.profit += (bike.price - bike.cost)
+                print("{} sold and removed from inventory. Profit added to total.".format(bike))
+                return self.inventory, self.profit
+            else:
+                return "Bicycle not in stock."
             
 
 class Customer:
