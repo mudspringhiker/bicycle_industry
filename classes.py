@@ -10,10 +10,10 @@ class Bicycle():
         self.weight = weight
         self.cost = cost
         self.price = 0
-        print("Bicycle {} created".format(self.model))
+        print("Bicycle {} created!".format(self.model))
         
     def __repr__(self):
-        return "Bicycle: {}, {}".format(self.model, self.weight)
+        return "Bicycle: {}".format(self.model)
         
     def dict_(self):
         """Returns the bicycle in a dictionary form"""
@@ -40,15 +40,17 @@ class BikeShop:
         if self.inventory:
             return "Shop name: {}".format(self.name)
         else:
-            return "Shop name: {} NOTE: No item in stock".format(self.name)
+            return "Shop name: {} NOTE: No items in stock".format(self.name)
 
-    def stock(self, bike):
-        """Returns the inventory of the shop after adding a bicycle
-        to the inventory."""
+    def stock(self, bike, number_of_bikes):
+        """Returns the inventory of the shop after adding 'number_of_bikes'
+        bicycle to the inventory."""
         bike.price = bike.cost + bike.cost * 0.20
         bike_info = bike.dict_()
         bike_info["price"] = bike.price
-        self.inventory.append(bike_info)
+        for i in range(number_of_bikes):
+            self.inventory.append(bike_info)
+        print("{} {} added to shop inventory.".format(number_of_bikes, bike))
         return self.inventory
         
     def count(self):
@@ -76,13 +78,13 @@ class Customer:
         self.name = name
         self.fund = fund
         
-    def buy(self, bike):
+    def buy(self, bike, bikeshop):
+        """Returns customer funds, bikeshop inventory after 
+        customer buys a bike."""
         if self.fund >= bike.price:
-            self.fund += bike.price
+            self.fund -= bike.price
+            bikeshop.sell(bike)
             print("{} bought a bike!".format(self.name))
-            return self.fund
+            return self.fund, bikeshop
         else:
             return("You don't have enough funds!")
-            
-    
-        
