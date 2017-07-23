@@ -35,5 +35,10 @@ print(bss.profit)
 bss.sell(bike0, 1)
 pprint.pprint(bss.count())
 print(bss.profit)
-
+print()
+joe = Customer("Joe", 4000)
+print(joe)
+print()
+joe.buy(1, bike2, bss)
+pprint.pprint(bss.count())
 

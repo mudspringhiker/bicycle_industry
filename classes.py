@@ -95,6 +95,7 @@ class Customer:
             self.fund -= bike.price
             bikeshop.sell(bike, n)
             print("{} bought a bike!".format(self.name))
+            print("{} has ${:.2f} remaining funds.".format(self.name, self.fund))
             return self.fund, bikeshop
         else:
             return("You don't have enough funds!")
