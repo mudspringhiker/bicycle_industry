@@ -45,7 +45,10 @@ class BikeShop:
     def stock(self, bike):
         """Returns the inventory of the shop after adding a bicycle
         to the inventory."""
-        self.inventory.append(bike.dict_())
+        bike.price = bike.cost + bike.cost * 0.20
+        bike_info = bike.dict_()
+        bike_info["price"] = bike.price
+        self.inventory.append(bike_info)
         return self.inventory
         
     def count(self):
@@ -54,10 +57,11 @@ class BikeShop:
         return Counter(record)
     
     def sell(self, bike):
-        if bike in self.inventory:
-            bike_i = self.inventory.index(bicycle)
-            del self.inventory[bike_i]
-            # bike_price = bicycle.cost + bicycle.cost * 0.20
+        """Updates the shop's inventory after selling a bike."""
+        if bike.dict_() in self.inventory:
+            bike_index = self.inventory.index(bicycle)
+            del self.inventory[bike_index]
+            bike.price = bike.cost + bike.cost * 0.20
             self.profit += (bicycle.price - bicycle.cost)
             return "{} sold.\nProfit: ${:.2f}".format(bicycle, self.profit)
         else:
@@ -68,7 +72,6 @@ class Customer:
     '''
     Customer has name, fund to buy bike, can buy and own bike
     '''
-    # pass
     def __init__(self, name, fund):
         self.name = name
         self.fund = fund
