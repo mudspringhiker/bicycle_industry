@@ -1,6 +1,7 @@
 from bicycles import Bicycle, BikeShop, Customer
 import random
 
+
 def main():
     print_header()
     # Create 6 different bicycle models
