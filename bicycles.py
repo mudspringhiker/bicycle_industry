@@ -42,10 +42,11 @@ class BikeShop:
         else:
             return "Shop name: {} NOTE: No items in stock".format(self.name)
 
-    def stock(self, bike, number_of_bikes):
+    def stock(self, bike, number_of_bikes, profit):
         """Returns the inventory of the shop after adding 'number_of_bikes'
         bicycle to the inventory."""
-        bike.price = bike.cost + bike.cost * 0.20
+        bike.price = bike.cost + (bike.cost * profit)
+        #print(bike.price)
         bike_info = bike.dict_()
         bike_info["price"] = bike.price
         for i in range(number_of_bikes):
@@ -66,12 +67,15 @@ class BikeShop:
         for i in range(n):
             if bike.model in inventory_models:
                 # print(True)
+                bike.price = [item["price"] for item in self.inventory if item["model"] == bike.model][0]
+                self.profit = self.profit + (bike.price - bike.cost) 
+                #print(bike.price)
+                #print(bike.cost)
+                print("{} sold and removed from inventory. {} added to profit.".format(bike, (bike.price - bike.cost)))
                 for i, model in enumerate(inventory_models):
                     if model == bike.model:
                         del self.inventory[i]  # delete the sold bike from inventory
                         break                  # delete only for first one found
-                self.profit += (bike.price - bike.cost)
-                print("{} sold and removed from inventory. Profit added to total.".format(bike))
                 return self.inventory, self.profit
             else:
                 return "Bicycle not in stock."
@@ -93,9 +97,9 @@ class Customer:
         customer buys n number of bike from bikeshop."""
         if self.fund >= bike.price:
             self.fund -= bike.price
-            bikeshop.sell(bike, n)
-            print("{} bought a bike!".format(self.name))
+            print("{} bought a {}!".format(self.name, bike.model))
             print("{} has ${:.2f} remaining funds.".format(self.name, self.fund))
+            bikeshop.sell(bike, n)
             return self.fund, bikeshop
         else:
             return("You don't have enough funds!")
